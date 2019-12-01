@@ -1,4 +1,9 @@
-var React = require('react');
+
+
+
+import React from 'react';
+import {FaHtml5,FaCss3,FaJs,FaReact,FaNodeJs} from 'react-icons/fa'
+import {FaFreeCodeCamp,FaGithub} from 'react-icons/fa'
 var Footer = function(props) {
   return (
     <div className="footer">
@@ -8,18 +13,39 @@ var Footer = function(props) {
        {/* <p>&copy; 2019</p>*/}
       </div>
       <ul className="social-coding">
-        <li> <a href={'https://freecodecamp.com/markhalstead'}> <i class="fab fa-free-code-camp"></i></a></li>
-         <li>  <a href={'https://github.com/MarkTriesCoding/'}><i class="fab fa-github"></i></a></li>
+        <li> <a href={'https://freecodecamp.com/markhalstead'}>
+        <i class="fab fa-free-code-camp"></i>
+        <FaFreeCodeCamp />
+        </a>
+        </li>
+         <li>  <a href={'https://github.com/MarkTriesCoding/'}>
+         <i class="fab fa-github"></i>
+         <FaGithub />
+         </a>
+         </li>
       </ul>
       <div className="madeWith">
         <p>Made with:</p>
         <ul>
-          <li><i class="fab fa-html5"  /></li>
-          <li><i class="fab fa-css3"  /></li><li><i class="fab fa-js"  /></li><li><i class="fab fa-react" /></li>
-          <li><i class="fab fa-node-js"  /></li>
+
+          <li>
+          <FaHtml5 />
+          </li>
+          <li>
+          <FaCss3 />
+          </li>
+          <li>
+          <FaJs />
+          </li>
+          <li>
+          <FaReact />
+          </li>
+          <li>
+          <FaNodeJs />
+          </li>
         </ul></div>
 
     </div>
   );
 }
-module.exports = Footer
+export default Footer

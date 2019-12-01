@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 const Modal=function(props){
    const showHideModal = props.showModal ? "modal display-flex":"modal display-none";
    let text = props.modalText;
@@ -9,4 +9,4 @@ const Modal=function(props){
       )
 
 }
-module.exports = Modal
+export default Modal

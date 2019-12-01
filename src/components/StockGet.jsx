@@ -1,9 +1,12 @@
 
-var React = require('react');
+import React from 'react';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {FaSearch} from 'react-icons/fa'
 var StockGet = function(props) {
 
 
   return (
+
     <div>
       <form
         id="stockForm"
@@ -12,10 +15,11 @@ var StockGet = function(props) {
       >
         <button
           id="stockButton"
-          className={props.searchActive ? "buttonSearchInputActive" : ""}
+          className={"waves-effect"+" "+(props.searchActive ? "buttonSearchInputActive" : "")}
 
           >
-          <i class="fas fa-search fa-1x" />
+
+          <FaSearch size={25} />
         </button>
 
         <input
@@ -34,4 +38,4 @@ var StockGet = function(props) {
     </div>
   );
 }
-module.exports = StockGet
+export default StockGet

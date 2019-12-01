@@ -1,10 +1,14 @@
-var React = require('react');
+import React from 'react';
+
+import {FaTrash,FaArrowUp,FaArrowDown,FaPen} from 'react-icons/fa';
 
 var FeatureStock = function(props) {
   if(props.isClosed) {
     return null;
   } else {
+
     return (
+
       <div
         className={
           "featureStock" +
@@ -15,6 +19,7 @@ var FeatureStock = function(props) {
         }
         onClick={props.handleClick}
         data-key={props.symbol}
+
       >
         <div
           className="closeBox"
@@ -28,14 +33,19 @@ var FeatureStock = function(props) {
           onClick={props.addToCustom}
           data-key={props.symbol}
         >
-          <i class="fas fa-pen" data-key={props.symbol} />
+      {/*  <i class="fas fa-pen" data-key={props.symbol} />*/}
+
+          {/*   <div data-key={props.symbol}>*/}
+           <FaPen data-key={props.symbol}/>
+          {/*   </div>*/}
         </div>
         <div
           className="removeFromCustom"
           onClick={props.removeFromCustom}
           data-key={props.symbol}
         >
-          <i class="fas fa-trash" data-key={props.symbol} />
+        {/*  <i class="fas fa-trash" data-key={props.symbol} />*/}
+           <FaTrash data-key={props.symbol}/>
         </div>
         <p className="stockName">{props.stock}</p>
         <p className="exchange">{props.exchange}</p>
@@ -45,7 +55,8 @@ var FeatureStock = function(props) {
         <div
           className={props.change >= 0 ? "positiveArrow" : "negativeArrow"}
           >
-          <i class={"fas"+" " +(props.change >= 0 ? "fa-arrow-up":"fa-arrow-down")}/>
+          {props.change >= 0 ? <FaArrowUp /> : <FaArrowDown />}
+
         </div>
         <p
           className={
@@ -122,8 +133,9 @@ var FeatureStock = function(props) {
           {(props.ytdChange * 100).toFixed(2) +"%"}
         </p>
       </div>
+
     );
   }
 }
 
-module.exports = FeatureStock
+export default FeatureStock

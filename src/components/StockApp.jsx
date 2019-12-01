@@ -1,12 +1,15 @@
-var React = require('react');
+import React from 'react';
 
-var Footer = require('./Footer')
-var Modal = require('./Modal')
-var FeatureStock= require('./FeatureStock')
-var StockGet = require('./StockGet')
-var Presets = require('./Presets')
-var Intro = require('./Intro');
+import Footer from './Footer';
+import Modal from './Modal';
+import FeatureStock from './FeatureStock';
+import StockGet from './StockGet';
+import Presets from './Presets';
+import Intro from './Intro';
 // var Graph = require('./Graph');
+import {FaCannabis, FaKeyboard, FaLightbulb , FaBookmark, FaRing, FaPen, FaIndustry, FaSun, FaMoneyBill, FaPrescription, FaToiletPaper,FaPlusSquare} from 'react-icons/fa'
+
+import M from 'materialize-css'
 
 class StockApp extends React.Component {
   constructor(props) {
@@ -24,26 +27,26 @@ class StockApp extends React.Component {
       presets: {
         CANNABIS: {
           tickers: ["ACB", "APHA", "CGC", "CRON", "TLRY"],
-          iconTag: "fa fa-cannabis"
+          iconTag: <FaCannabis data-key="CANNABIS"/>
         },
         FAANG: {
           tickers: ["FB", "AMZN", "AAPL", "NFLX", "GOOG"],
-          iconTag: "fas fa-keyboard"
+          iconTag: <FaKeyboard />
         },
-        ENERGY: { tickers: ["ENB", "SU", "CNQ", "DVN"], iconTag: "fas fa-sun" },
+        ENERGY: { tickers: ["ENB", "SU", "CNQ", "DVN"], iconTag: <FaSun /> },
         UTILITIES: {
           tickers: ["EXC", "AES", "SCG", "FE"],
-          iconTag: "fas fa-lightbulb"
+          iconTag: <FaLightbulb />
         },
-        METALS: { tickers: ["BAR", "GLD", "LIT"], iconTag: "fas fa-ring" },
-        INDEX: { tickers: ["SPY", "DOW", "NSQ"], iconTag: "fas fa-bookmark" },
+        METALS: { tickers: ["BAR", "GLD", "LIT"], iconTag: <FaRing /> },
+        INDEX: { tickers: ["SPY", "DOW", "NSQ"], iconTag:  <FaBookmark /> },
 
-        BIOTECH: { tickers: ["CELG", "SGEN", "VRTX"], iconTag: "fas fa-prescription" },
-        HEALTH: { tickers: ["CNC", "ALGN", "CVS","ICLR","ABBV"], iconTag: "fas fa-plus-square" },
-        "CONSUMER DISC.": { tickers: ["WMT", "MCD", "XLY","AMZN"], iconTag: "fas fa-money-bill" },
-        "CONSUMER STAPLES": { tickers: ["VDC", "XLP", "IEV","SRCS"], iconTag: "fas fa-toilet-paper" },
-        INDUSTRIAL: { tickers: ["XLI", "VIS", "IYT"], iconTag: "fas fa-industry" },
-        myStocks: { tickers: [], iconTag: "fas fa-pen" }
+        BIOTECH: { tickers: ["CELG", "SGEN", "VRTX"], iconTag: <FaPrescription /> },
+        HEALTH: { tickers: ["CNC", "ALGN", "CVS","ICLR","ABBV"], iconTag: <FaPlusSquare /> },
+        "CONSUMER DISC.": { tickers: ["WMT", "MCD", "XLY","AMZN"], iconTag: <FaMoneyBill /> },
+        "CONSUMER STAPLES": { tickers: ["VDC", "XLP", "IEV","SRCS"], iconTag: <FaToiletPaper /> },
+        INDUSTRIAL: { tickers: ["XLI", "VIS", "IYT"], iconTag: <FaIndustry /> },
+        myStocks: { tickers: [], iconTag: <FaPen /> }
       },
       searchActive: false,
       // graphData:[]
@@ -68,7 +71,10 @@ class StockApp extends React.Component {
     this.convertCap = this.convertCap.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // M.AutoInit();
+
+  }
 
   componentDidUpdate() {
     // this.setState({loading:false})
@@ -122,12 +128,28 @@ class StockApp extends React.Component {
 
   handleClick(event) {
     event.stopPropagation();
-    event.preventDefault();
-    if (event.target.className === "closeBox") {
-      this.closeStock(event);
-    } else {
-      this.resizeStock(event);
-    }
+     event.preventDefault();
+    let targetClass = event.target.className ;
+switch(targetClass){
+  case "closeBox":
+    this.closeStock(event);
+
+  break;
+  case "addToCustom":
+    this.addToCustom(event);
+  break;
+  case "removeToCustom":
+    this.removeToCustom(event);
+  break;
+  default:
+  // console.log("here")
+    this.resizeStock(event);
+}
+
+
+
+
+
   }
   // displayAddState(addState) {
   //   if (addState) {
@@ -174,7 +196,8 @@ class StockApp extends React.Component {
       },800)
   }
 removeFromCustom(event){
-  const dataKey = event.target.getAttribute("data-key");
+  event.stopPropagation();
+  const dataKey = event.target.parentElement.getAttribute("data-key");
 
     if (
       this.state.presets.myStocks.tickers.some(el => {
@@ -197,10 +220,11 @@ removeFromCustom(event){
 }
 
   addToCustom(event) {
+    event.stopPropagation();
 
-
-    const dataKey = event.target.getAttribute("data-key");
-    // console.log(dataKey)
+    const dataKey = event.target.parentElement.getAttribute("data-key") || event.target.getAttribute("data-key")
+    ;
+     ;
     if (
       this.state.presets.myStocks.tickers.some(el => {
         return el === dataKey;
@@ -220,11 +244,23 @@ removeFromCustom(event){
   }
 
   presetDisplay(event) {
-    const dataKey = event.target.getAttribute("data-key");
-    // console.log(dataKey);
-    this.state.presets[dataKey].tickers.forEach(el => {
-      this.stockSearch(el);
-    });
+    event.stopPropagation();
+    console.log(event.target.getAttribute("data-key"))
+
+    // if(event.target.tagName =="li"){
+    //   console.log(" LI ")
+    // }
+
+   const dataKey = (event.target.hasAttribute("data-key") || event.target.parentNode.parentNode.hasAttribute("data-key") ) ? event.target.getAttribute("data-key") : null;
+
+
+     if(dataKey){
+    // const dataKey = event.target.getAttribute("data-key") ;
+       console.log(dataKey);
+      this.state.presets[dataKey].tickers.forEach(el => {
+        this.stockSearch(el);
+      });
+    }
   }
 
   togglePresetsDisplay() {
@@ -265,25 +301,21 @@ toggleCustomDisplay(){
   }
 
   resizeStock(e) {
-    let target;
+    let eTarget;
     let tempStocks = this.state.stocks.slice();
     let symbolOfBox;
-    if (
-      e.target.className.includes("addToCustom") ||
-      e.target.parentNode.className.includes("addToCustom") ||
-      e.target.className.includes("removeFromCustom") ||
-      e.target.parentNode.className.includes("removeFromCustom")
-    ) {
-      return null;
+    console.log( e.target.className.split(" "))
+    if ( e.target.className.split(" ").includes( "featureStock" ) ) {
+      eTarget = e.target;
     }
-    if (e.target.className.includes("featureStock")) {
-      target = e.target;
-    } else if (e.target.parentNode.className.includes("price")) {
-      target = e.target.parentNode.parentNode;
-    } else {
-      target = e.target.parentNode;
+    // else if (Array(e.target.parentNode.className).includes("price")) {
+    //   target = e.target.parentNode.parentNode;
+    // }
+    else {
+      eTarget = e.target.parentNode;
     }
-    symbolOfBox = target.getAttribute("data-key");
+  //  console.log(target)
+    symbolOfBox = eTarget.getAttribute("data-key");
     tempStocks = tempStocks.map(el => {
       if (el.symbol == symbolOfBox) {
         el.isExpanded = !el.isExpanded;
@@ -294,7 +326,7 @@ toggleCustomDisplay(){
         });
       }
     });
-    console.log(target);
+  //  console.log(target);
   }
 
   closeAllStocks() {
@@ -426,7 +458,7 @@ toggleCustomDisplay(){
 
           <div className="list">{listOfStocks}</div>
           <div
-            className={
+            className={"waves-effect waves-light "+
               "closeAllStocks" +
               " " +
               (this.state.stocks.length > 0 ? "" : "hideCloseAll")
@@ -437,11 +469,11 @@ toggleCustomDisplay(){
           </div>
         </div>
         <Modal modalText={this.state.modalText} showModal={this.state.showModal}/>
-      
+
 
         <Footer />
       </div>
     );
   }
 }
-module.exports = StockApp
+export default StockApp

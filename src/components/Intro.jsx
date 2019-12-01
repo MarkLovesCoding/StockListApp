@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 
 var Intro = () => {
   return (
@@ -8,4 +8,4 @@ var Intro = () => {
     </div>
   );
 };
-module.exports = Intro
+export default Intro

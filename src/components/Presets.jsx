@@ -1,4 +1,8 @@
-var React = require('react');
+import React from 'react';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {FaList} from 'react-icons/fa';
+var iconSize = 25;
+
 var Presets = function(props) {
   let presetList = props.presets;
   //console.log(presetList)
@@ -8,15 +12,17 @@ var Presets = function(props) {
     //console.log(presetList[el])
     return (
       <li
-        className="presetListItems"
+        className={"presetListItems"+" "+"waves-effect"}
         data-key={el}
         onClick={props.presetDisplay}
       >
+       { presetList[el].iconTag }
+      {/*}
         <i
           data-key={el}
           onClick={props.presetDisplay}
           class={presetList[el].iconTag}
-        />
+        />*/}
         <h4 data-key={el} onClick={props.presetDisplay}>
           {el}
         </h4>
@@ -28,12 +34,13 @@ var Presets = function(props) {
     return (
       <div
         style={{ cursor: "pointer" }}
-        className="presetListMenu"
+        className={"presetListMenu"+" "+"waves-effect"}
         onClick={props.togglePresetsDisplay}
         // onMouseEnter={props.togglePresetsHover}
         // onMouseExit={props.togglePresetsHover}
-      >
-        <i class="fas fa-list" />
+      ><i>
+      <FaList size={iconSize} /></i>
+    {/*    <i class="fas fa-list" /> */}
       </div>
     );
   } else {
@@ -48,4 +55,4 @@ var Presets = function(props) {
     );
   }
 }
-module.exports = Presets
+export default Presets
