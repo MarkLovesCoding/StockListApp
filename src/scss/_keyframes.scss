@@ -1,0 +1,26 @@
+@keyframes pulse{
+  0%{
+    color:rgba(244,200,100,0)
+  }
+  100%{
+    color:rgba(244,200,100,1)
+  }
+}
+
+@keyframes reject {
+  0% {
+    transform: translatX(00px);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(00px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(00px);
+  }
+}

@@ -1,0 +1,132 @@
+.expanded {
+  padding: 10px;
+  height: 70vh;
+  //min-height:700px;
+  width: 95vw;
+  grid-template-rows: 3em 1em 1em 1fr 50px 0.6fr 0.6fr 20px;
+  grid-template-columns: 25% 1fr 1fr 1fr;
+  grid-template-areas:
+    "stockName stockName stockName stockName"
+    "exchange exchange exchange exchange"
+    "time time time time"
+    "symbol symbol price price"
+    ". arrow change changePercent "
+    "peRatio volume week52Low week52High"
+    "marketCap ytdChange . ."
+    ". . . .";
+  &:after {
+    position: absolute;
+    content: "<";
+    font-size: 2em;
+    bottom: 8px;
+    right: 10px;
+    color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+  }
+  //   width: 80vw;
+  //   min-width:400px;
+  //   display: grid;
+  //   grid-template-rows: 1fr 1fr 1fr 1fr 6fr 1fr 1fr;
+  //   grid-template-columns: 120px 120px 50px 0.5fr 0.5fr 0.25fr 30px;
+  .marketCap {
+    grid-area: marketCap;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    &:before {
+      font-weight: 200;
+      content: "MARKET CAP";
+    }
+  }
+  .changePercent {
+    margin-left: -50%;
+    justify-content: flex-start;
+  }
+  .peRatio,
+  .week52High,
+  .week52Low,
+  .avgVolume,
+  .marketCap,
+  .ytdChange {
+    align-self: flex-end;
+    //////text-align:right;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: left;
+    position: relative;
+    font-size: 1rem;
+    animation: loadFeature 1.5s;
+    &:before {
+      padding-bottom: 5px;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+    &:after {
+      content: "";
+      width: 100%;
+      height: 2px;
+      border-radius: 2px;
+      margin-top: 10px;
+      background-color: rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease-in;
+    }
+    &:hover {
+      // background-color:rgba(0,0,0,0.075);
+
+      // padding-top: 5px;
+      // border-radius: 5px;
+      &:after {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+  @keyframes loadFeature {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .price,
+  .symbol,
+  .exchange,
+  .lastTradeTime,
+  .stockName,
+  .change,
+  .changePercent,
+  .positiveArrow,
+  .negativeArrow {
+    animation: loadFeature 0.8s;
+  }
+
+  .symbol {
+    font-size: 2.5rem;
+    justify-content: center;
+  }
+  .lastTradeTime,
+  .stockName {
+    font-size: 0.8rem;
+    padding-left: 10px;
+  }
+  .exchange {
+    font-size: 0.7rem;
+    padding-left: 10px;
+  }
+  .change,
+  .changePercent,
+  .positiveArrow,
+  .negativeArrow {
+    align-self: flex-start;
+    font-size: 1.3rem;
+  }
+  .change {
+    margin-left: -30px;
+  }
+  .positiveArrow,
+  .negativeArrow {
+    font-size: 1.8rem;
+
+    justify-content: center;
+  }
+}

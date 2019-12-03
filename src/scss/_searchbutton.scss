@@ -1,0 +1,53 @@
+.reject {
+     animation:reject 0.2s linear;
+  }
+  button#stockButton {
+    margin-bottom: 0px;
+    background: rgba(250, 250, 250, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: 70px;
+    width: 70px;
+    padding-left: 0px;
+    border-radius: $borderRadius;
+    outline: none;
+    cursor: pointer;
+    z-index: 5;
+    transition: all 0.2s ease-out;
+    &:hover {
+      &:nth-child(1) {
+        color: rgba(244, 200, 100, 1);
+        background-color: rgba(50, 50, 70, 1);
+      }
+    }
+    &.buttonSearchInputActive {
+      border-radius: 20px 0px 0px 20px;
+    }
+  }
+  input {
+    font-weight: 600;
+    background: rgb(250, 250, 250);
+    border-radius: 0px 20px 20px 0px;
+    height: 70px;
+    font-size: 1.5em;
+    min-width: 0px;
+    padding-left: 20px;
+    border: none;
+    outline: none;
+    cursor: inherit;
+    transition: width 1s ease;
+    &::selection {
+      background-color: grey;
+    }
+    &.searchVisible {
+      width: 200px;
+      border-radius: 20px 0px 0px 20px;
+    }
+    &.searchHidden {
+      width: 0px;
+      border-radius: 20px;
+      padding: 0px;
+    }
+  }

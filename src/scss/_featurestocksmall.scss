@@ -1,0 +1,27 @@
+.small {
+  width: 375px;
+  grid-template-rows: 1fr 1fr 1fr 2fr 1.5fr 20px;
+  grid-template-columns: 1.5fr 20px 0.5fr 1fr;
+  grid-template-areas:
+    "stockName stockName stockName stockName "
+    "exchange exchange exchange exchange "
+    "time time time time"
+    "symbol arrow price price"
+    "symbol arrow change changePercent "
+    ". . . .";
+  &:after {
+    position: absolute;
+    content: ">";
+    font-size: 2rem;
+    bottom: 10px;
+    right: 10px;
+    color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+  }
+  //     grid-gap: 2px;
+  //   grid-template-rows: 1fr 1fr 1fr 1fr;
+  //   grid-template-columns: 1fr 2fr 50px 70px 70px 30px;
+}
+.small {
+  height: 100px;
+}

@@ -1,0 +1,84 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  &::selection {
+    background-color: transparent;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(
+    0deg,
+    rgba(60, 60, 70, 1),
+    rgba(100, 150, 150, 1),
+    rgba(60, 60, 100, 1)
+  );
+  background-size: 100% 100%, cover;
+  transition: background 1s ease;
+  font-family: "Red Hat Display", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  min-height: 85vh;
+  max-width: 100vw;
+  padding-bottom: 50px;
+  position: relative;
+}
+.header {
+  margin:80px;
+  top: 100px;
+  left: 40px;
+  font-size: 2em;
+  text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+
+.closeAllStocks {
+  flex-flow: nowrap;
+  background: white;
+  width: 200px;
+  padding: 5px;
+  border-radius: $borderRadius;
+
+  z-index: 2;
+  position: relative;
+  transition: all 0.3s ease;
+  border: solid 1px rgba(0, 0, 0, 0.5);
+  &:hover {
+    border-radius: 2px;
+    color: white;
+    background: #5b5f9633;
+    border: 1px solid white;
+    cursor: pointer;
+  }
+  &:active{
+    background:rgba(200,200,200,0.2)
+  }
+}
+.hideCloseAll {
+  display: none;
+}
+
+
+
+.show-button {
+  display: block;
+}
+.hide-button {
+  display: oone;
+}
