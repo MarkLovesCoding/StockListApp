@@ -13,9 +13,6 @@
   box-shadow: $boxShadow;
   transition: background-color 0.2s ease-out;
   transition: all 0.2s ease;
-  // &:after{
-  //   bottom:0px;transition:all 0.2s ease;
-  // }
   &:hover:after {
     content: "";
     position: absolute;
@@ -25,16 +22,12 @@
     border-bottom: 10px solid transparent;
     border-left: 10px solid transparent;
     border-top: 10px solid rgba(50, 50, 70, 1);
-    // background-color:white;
     bottom: -20px;
     left: 25px;
     transition: all 0.2s ease;
   }
   &:hover {
-
     background-color: rgba(50, 50, 70, 1);
-
-    //transform:rotate(1deg);
     i {
 
       color: rgba(244, 200, 100, 1);

@@ -147,6 +147,7 @@ a {
   width: 200px;
   padding: 5px;
   border-radius: 20px;
+  margin-top: 50px;
   z-index: 2;
   position: relative;
   transition: all 0.3s ease;
@@ -203,7 +204,6 @@ a {
   width: 200px;
   padding: 5px;
   border-radius: 20px;
-  margin: auto;
   z-index: 2;
   position: relative;
   transition: all 0.3s ease;

@@ -1,7 +1,6 @@
 .expanded {
   padding: 10px;
   height: 70vh;
-  //min-height:700px;
   width: 95vw;
   grid-template-rows: 3em 1em 1em 1fr 50px 0.6fr 0.6fr 20px;
   grid-template-columns: 25% 1fr 1fr 1fr;
@@ -23,11 +22,6 @@
     color: rgba(0, 0, 0, 0.7);
     cursor: pointer;
   }
-  //   width: 80vw;
-  //   min-width:400px;
-  //   display: grid;
-  //   grid-template-rows: 1fr 1fr 1fr 1fr 6fr 1fr 1fr;
-  //   grid-template-columns: 120px 120px 50px 0.5fr 0.5fr 0.25fr 30px;
   .marketCap {
     grid-area: marketCap;
     font-weight: 600;
@@ -49,7 +43,6 @@
   .marketCap,
   .ytdChange {
     align-self: flex-end;
-    //////text-align:right;
     padding-left: 5px;
     padding-right: 5px;
     text-align: left;
@@ -71,10 +64,6 @@
       transition: all 0.2s ease-in;
     }
     &:hover {
-      // background-color:rgba(0,0,0,0.075);
-
-      // padding-top: 5px;
-      // border-radius: 5px;
       &:after {
         background-color: rgba(0, 0, 0, 0.3);
       }
@@ -126,7 +115,6 @@
   .positiveArrow,
   .negativeArrow {
     font-size: 1.8rem;
-
     justify-content: center;
   }
 }
