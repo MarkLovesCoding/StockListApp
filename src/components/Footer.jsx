@@ -19,7 +19,7 @@ var Footer = function(props) {
           <li><i class="fab fa-node-js"  /></li>
         </ul></div>
 
-    </div>
+     </div>
   );
 }
 module.exports = Footer
