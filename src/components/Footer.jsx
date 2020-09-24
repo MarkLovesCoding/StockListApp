@@ -45,7 +45,7 @@ var Footer = function(props) {
           </li>
         </ul></div>
 
-    </div>
+     </div>
   );
 }
 export default Footer
