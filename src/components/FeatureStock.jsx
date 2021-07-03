@@ -2,10 +2,21 @@ import React from 'react';
 
 import {FaTrash,FaArrowUp,FaArrowDown,FaPen} from 'react-icons/fa';
 
+function crop_name_length(props_symbol){
+  if (props_symbol.length > 20){
+    return props_symbol.substring(0,20) + "..."
+  }
+  else{
+    return props_symbol
+  }
+}
+
 var FeatureStock = function(props) {
   if(props.isClosed) {
     return null;
   } else {
+
+
 
     return (
 
@@ -33,25 +44,20 @@ var FeatureStock = function(props) {
           onClick={props.addToCustom}
           data-key={props.symbol}
         >
-      {/*  <i class="fas fa-pen" data-key={props.symbol} />*/}
 
-          {/*   <div data-key={props.symbol}>*/}
            <FaPen data-key={props.symbol}/>
-          {/*   </div>*/}
         </div>
         <div
           className="removeFromCustom"
           onClick={props.removeFromCustom}
           data-key={props.symbol}
         >
-        {/*  <i class="fas fa-trash" data-key={props.symbol} />*/}
            <FaTrash data-key={props.symbol}/>
         </div>
-        <p className="stockName">{props.stock}</p>
+        <p className="stockName">{props.isExpanded ? props.stock : crop_name_length(props.stock)}</p>
         <p className="exchange">{props.exchange}</p>
         <p className="symbol">{props.symbol}</p>
         <p className="price">{props.price ? props.price.toFixed(2) : null}</p>
-        {/*  <p className="changeText" style={props.isExpanded ? {"display":"flex"}:{"display":"none"}}>CHANGE</p> */}
         <div
           className={props.change >= 0 ? "positiveArrow" : "negativeArrow"}
           >

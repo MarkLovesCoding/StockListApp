@@ -97,6 +97,9 @@
   .stockName {
     font-size: 0.8rem;
     padding-left: 10px;
+    overflow-x: overlay;
+    min-width: 100%;
+    width:auto;
   }
   .exchange {
     font-size: 0.7rem;

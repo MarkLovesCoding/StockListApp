@@ -6,7 +6,7 @@ import FeatureStock from './FeatureStock';
 import StockGet from './StockGet';
 import Presets from './Presets';
 import Intro from './Intro';
-// var Graph = require('./Graph');
+
 import {FaCannabis, FaKeyboard, FaLightbulb , FaBookmark, FaRing, FaPen, FaIndustry, FaSun, FaMoneyBill, FaPrescription, FaToiletPaper,FaPlusSquare} from 'react-icons/fa'
 
 import M from 'materialize-css'
@@ -25,6 +25,12 @@ class StockApp extends React.Component {
 
       //  presetsListMenuDisplay:true,
       presets: {
+        INDEX: { tickers: ["SPY", "DOW", "NSQ"], iconTag:  <FaBookmark /> },
+        BIOTECH: { tickers: ["CELG", "SGEN", "VRTX"], iconTag: <FaPrescription /> },
+        HEALTH: { tickers: ["CNC", "ALGN", "CVS","ICLR","ABBV"], iconTag: <FaPlusSquare /> },
+        "CONSUMER DISC.": { tickers: ["WMT", "MCD", "XLY","AMZN"], iconTag: <FaMoneyBill /> },
+        "CONSUMER STAPLES": { tickers: ["VDC", "XLP", "IEV","SRCS"], iconTag: <FaToiletPaper /> },
+        INDUSTRIAL: { tickers: ["XLI", "VIS", "IYT"], iconTag: <FaIndustry /> },
         CANNABIS: {
           tickers: ["ACB", "APHA", "CGC", "CRON", "TLRY"],
           iconTag: <FaCannabis data-key="CANNABIS"/>
@@ -39,17 +45,10 @@ class StockApp extends React.Component {
           iconTag: <FaLightbulb />
         },
         METALS: { tickers: ["BAR", "GLD", "LIT"], iconTag: <FaRing /> },
-        INDEX: { tickers: ["SPY", "DOW", "NSQ"], iconTag:  <FaBookmark /> },
 
-        BIOTECH: { tickers: ["CELG", "SGEN", "VRTX"], iconTag: <FaPrescription /> },
-        HEALTH: { tickers: ["CNC", "ALGN", "CVS","ICLR","ABBV"], iconTag: <FaPlusSquare /> },
-        "CONSUMER DISC.": { tickers: ["WMT", "MCD", "XLY","AMZN"], iconTag: <FaMoneyBill /> },
-        "CONSUMER STAPLES": { tickers: ["VDC", "XLP", "IEV","SRCS"], iconTag: <FaToiletPaper /> },
-        INDUSTRIAL: { tickers: ["XLI", "VIS", "IYT"], iconTag: <FaIndustry /> },
         myStocks: { tickers: [], iconTag: <FaPen /> }
       },
       searchActive: false,
-      // graphData:[]
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -57,36 +56,15 @@ class StockApp extends React.Component {
     this.stockSearch = this.stockSearch.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.resizeStock = this.resizeStock.bind(this);
-    // this.addWeed = this.addWeed.bind(this);
-    // this.addFaang= this.addFaang.bind(this);
     this.togglePresetsDisplay = this.togglePresetsDisplay.bind(this);
-    //  this.togglePresetsHover = this.togglePresetsHover.bind(this);
     this.presetDisplay = this.presetDisplay.bind(this);
     this.closeAllStocks = this.closeAllStocks.bind(this);
     this.displayModal = this.displayModal.bind(this);
     this.addToCustom = this.addToCustom.bind(this);
-
     this.removeFromCustom = this.removeFromCustom.bind(this);
     this.toggleCustomDisplay = this.toggleCustomDisplay.bind(this);
     this.convertCap = this.convertCap.bind(this);
   }
-
-  componentDidMount() {
-    // M.AutoInit();
-
-  }
-
-  componentDidUpdate() {
-    // this.setState({loading:false})
-  }
-
-  componentWillUpdate() {
-    // this.setState({
-    //   loading:true
-    // })
-  }
-
-  componentWillUnmount() {}
 
   componentDidUnmount() {
     this.setState({
@@ -97,20 +75,15 @@ class StockApp extends React.Component {
 
   handleChange(event) {
     const { value } = event.target;
-    //if stock doesnt already exist, proceed
- // const inputSelect = document.getElementsByClassname("input")[0];
-   //console.log(inputSelect)
-  //  inputSelect.select();
     this.setState({
       stockInput: value
     });
-    //}
+
   }
 
   handleSubmit(event) {
     event.preventDefault();
     event.target.childNodes[1].focus()
-  // this.input.focus();
     if (!this.state.searchActive) {
       this.setState({ searchActive: !this.state.searchActive });
     }
@@ -119,8 +92,6 @@ class StockApp extends React.Component {
       return el.symbol === this.state.stockInput.toUpperCase();
     });
     if (checkInput) {
-      // setInterval(() => {});
-      // return;
     } else {
       this.stockSearch(this.state.stockInput);
     }
@@ -142,7 +113,6 @@ switch(targetClass){
     this.removeToCustom(event);
   break;
   default:
-  // console.log("here")
     this.resizeStock(event);
 }
 

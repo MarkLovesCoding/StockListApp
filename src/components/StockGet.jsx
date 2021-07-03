@@ -4,9 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {FaSearch} from 'react-icons/fa'
 var StockGet = function(props) {
 
-
   return (
-
     <div>
       <form
         id="stockForm"
@@ -16,14 +14,10 @@ var StockGet = function(props) {
         <button
           id="stockButton"
           className={"waves-effect"+" "+(props.searchActive ? "buttonSearchInputActive" : "")}
-
-          >
-
+        >
           <FaSearch size={25} />
         </button>
-
         <input
-
           type="text"
           className={
             "stockInput" +
