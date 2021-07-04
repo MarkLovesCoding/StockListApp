@@ -10,7 +10,6 @@ var Footer = function(props) {
       <div className="who">
       <p> <span>Mark Halstead</span></p>
         <p>WEB DEVELOPER</p>
-       {/* <p>&copy; 2019</p>*/}
       </div>
       <ul className="social-coding">
         <li> <a href={'https://freecodecamp.com/markhalstead'}>
@@ -27,7 +26,6 @@ var Footer = function(props) {
       <div className="madeWith">
         <p>Made with:</p>
         <ul>
-
           <li>
           <FaHtml5 />
           </li>
