@@ -12,6 +12,7 @@ app.use(cors())
 app.get('/',(req,res)=>{
   res.sendFile(process.cwd() + '/public/index.html' );
 });
+
 sass.render({
     // file or data must be specified. In this case we're telling node-sass there's a SCSS file at source/style.scss
     file: process.cwd()+'/src/scss/style.scss'
@@ -35,9 +36,6 @@ sass.render({
     }
   }
 );
-// app.use(cors());
-// app.use(bodyParser.urlencoded({extended: true}));
-
 
 var listener = app.listen(port,()=>{
   console.log("Listening on "+ port)
