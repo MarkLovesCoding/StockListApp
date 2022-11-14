@@ -26,17 +26,17 @@ class StockApp extends React.Component {
       //  presetsListMenuDisplay:true,
       presets: {
         INDEX: { tickers: ["SPY", "DOW", "NSQ"], iconTag:  <FaBookmark /> },
-        BIOTECH: { tickers: ["CELG", "SGEN", "VRTX"], iconTag: <FaPrescription /> },
-        HEALTH: { tickers: ["CNC", "ALGN", "CVS","ICLR","ABBV"], iconTag: <FaPlusSquare /> },
+        BIOTECH: { tickers: ["MRK", "PFE", "MRNA"], iconTag: <FaPrescription /> },
+        HEALTH: { tickers: ["CNC", "ALGN", "CVS","ICLR", "ABBV"], iconTag: <FaPlusSquare /> },
         "CONSUMER DISC.": { tickers: ["WMT", "MCD", "XLY","AMZN"], iconTag: <FaMoneyBill /> },
         "CONSUMER STAPLES": { tickers: ["VDC", "XLP", "IEV","SRCS"], iconTag: <FaToiletPaper /> },
         INDUSTRIAL: { tickers: ["XLI", "VIS", "IYT"], iconTag: <FaIndustry /> },
         CANNABIS: {
-          tickers: ["ACB", "APHA", "CGC", "CRON", "TLRY"],
+          tickers: ["ACB", "CGC", "CRON", "TLRY"],
           iconTag: <FaCannabis data-key="CANNABIS"/>
         },
         FAANG: {
-          tickers: ["FB", "AMZN", "AAPL", "NFLX", "GOOG"],
+          tickers: ["META", "AMZN", "AAPL", "NFLX", "GOOG"],
           iconTag: <FaKeyboard />
         },
         ENERGY: { tickers: ["ENB", "SU", "CNQ", "DVN"], iconTag: <FaSun /> },
