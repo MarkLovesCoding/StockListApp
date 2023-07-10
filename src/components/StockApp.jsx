@@ -308,12 +308,18 @@ toggleCustomDisplay(){
   }
 
   stockSearch(symbol) {
+    if(!symbol){
+      return
+    }
+    const tdKey ="e1432819e1b743cc8fb8dea7255e1141"
+
     const token = "pk_8dc96364d1d94c0db9425f98efde9b4d";
     const address =
-      "https://cloud.iexapis.com/stable/stock/" +
+      // "https://cloud.iexapis.com/stable/stock/" +
+      "https://api.twelvedata.com/quote?symbol="+ 
       symbol +
-      "/quote?token=" +
-      token;
+      "&apikey="+
+      tdKey;
     console.log(address);
     fetch(address)
       .then(resp => {
@@ -331,23 +337,25 @@ toggleCustomDisplay(){
         });
         if (!checkIfStock) {
           let newStock = {
-            stock: resp.companyName,
-            price: resp.latestPrice,
+            stock: resp.name,
+            price: resp.close,
             symbol: resp.symbol,
             change: resp.change,
-            changePercent: resp.changePercent * 100,
-            avgTotalVolume: resp.avgTotalVolume,
-            week52High: resp.week52High,
-            week52Low: resp.week52Low,
-            lastTradeTime: resp.lastTradeTime,
-            latestTime: resp.latestTime,
-            primaryExchange: resp.primaryExchange,
+            changePercent: resp.percent_change*100,
+            avgTotalVolume: resp.average_volume,
+            week52High: resp.fifty_two_week.high,
+            week52Low: resp.fifty_two_week.low,
+            lastTradeTime: resp.timestamp,
+            latestTime: resp.timestamp,
+            primaryExchange: resp.exchange,
             peRatio: resp.peRatio,
-            ytdChange:resp.ytdChange,
-            marketCap: resp.marketCap,
+            ytdChange:1000,
+            marketCap: 10000000,
             isExpanded: false,
             isInCustom:false
           };
+          console.log(newStock)
+
           //  var graphableData = {
           //   x:this.state.graphData.length + 1,
           //   y:resp.changePercent,
@@ -369,6 +377,7 @@ toggleCustomDisplay(){
     let stockCount = this.state.stocks.length;
     let noStock = this.state.noStock;
     const listOfStocks = this.state.stocks.map((item, index) => {
+      console.log("item:"+Number(item.price).toFixed(2))
       if (item.isClosed) {
         return null;
       }

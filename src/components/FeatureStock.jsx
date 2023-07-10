@@ -57,7 +57,7 @@ var FeatureStock = function(props) {
         <p className="stockName">{props.isExpanded ? props.stock : crop_name_length(props.stock)}</p>
         <p className="exchange">{props.exchange}</p>
         <p className="symbol">{props.symbol}</p>
-        <p className="price">{props.price ? props.price.toFixed(2) : null}</p>
+        <p className="price">{props.price ? Number(props.price).toFixed(2) : null}</p>
         <div
           className={props.change >= 0 ? "positiveArrow" : "negativeArrow"}
           >
@@ -69,7 +69,7 @@ var FeatureStock = function(props) {
             "change" + " " + (props.change >= 0 ? "positive" : "negative")
           }
         >
-          ${props.change ? props.change.toFixed(2) : null}
+          ${props.change ? Number(props.change).toFixed(2) : null}
         </p>
         <p
           className={
@@ -78,7 +78,7 @@ var FeatureStock = function(props) {
             (props.changePercent >= 0 ? "positive" : "negative")
           }
         >
-          ({props.changePercent.toFixed(2)}%)
+          ({Number(props.changePercent).toFixed(2)}%)
         </p>
         <p
           className={
