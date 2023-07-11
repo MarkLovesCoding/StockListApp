@@ -11,7 +11,7 @@
     "symbol symbol price price"
     ". arrow change changePercent "
     "peRatio volume week52Low week52High"
-    "marketCap ytdChange . ."
+    "prevClose open low high"
     ". . . .";
   &:after {
     position: absolute;
@@ -22,14 +22,14 @@
     color: rgba(0, 0, 0, 0.7);
     cursor: pointer;
   }
-  .marketCap {
-    grid-area: marketCap;
+  .prevClose {
+    grid-area: prevClose;
     font-weight: 600;
     font-size: 1.1rem;
     margin-top: 20px;
     &:before {
       font-weight: 200;
-      content: "MARKET CAP";
+      content: "PREVIOUS CLOSE";
     }
   }
   .changePercent {
@@ -40,8 +40,10 @@
   .week52High,
   .week52Low,
   .avgVolume,
-  .marketCap,
-  .ytdChange {
+  .prevClose,
+  .open,
+  .high,
+  .low {
     align-self: flex-end;
     padding-left: 5px;
     padding-right: 5px;

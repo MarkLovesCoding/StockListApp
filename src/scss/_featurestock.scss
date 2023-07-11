@@ -141,12 +141,39 @@
   display: grid;
   grid-area: time;
 }
-.ytdChange {
+.open {
+  grid-area: open;
+  font-weight: 600;
+  font-size: 1.1rem;
+  &:before {
+    content: "OPEN";
+    font-weight: 200;
+  }
+}
+.low {
+  grid-area: low;
+  font-weight: 600;
+  font-size: 1.1rem;
+  &:before {
+    content: "LOW";
+    font-weight: 200;
+  }
+}
+.high {
+  grid-area: high;
+  font-weight: 600;
+  font-size: 1.1rem;
+  &:before {
+    content: "HIGH";
+    font-weight: 200;
+  }
+}
+.open {
   grid-area: ytdChange;
   font-weight: 600;
   font-size: 1.1rem;
   &:before {
-    content: "YTD Change";
+    content: "OPEN";
     font-weight: 200;
   }
 }

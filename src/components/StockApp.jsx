@@ -347,8 +347,10 @@ toggleCustomDisplay(){
             latestTime: resp.timestamp,
             primaryExchange: resp.exchange,
             peRatio: resp.peRatio,
-            ytdChange:"",
-            marketCap: "",
+            prevClose:resp.previous_close,
+            open: resp.open,
+            low: resp.low,
+            high: resp.high,
             isExpanded: false,
             isInCustom:false
           };
@@ -393,8 +395,10 @@ toggleCustomDisplay(){
           latestTime={item.latestTime}
           changePercent={item.changePercent}
           peRatio={item.peRatio}
-          marketCap={item.marketCap}
-          ytdChange={item.ytdChange}
+          prevClose={item.prevClose}
+          open={item.open}
+          low={item.low}
+          high={item.high}
           exchange={item.primaryExchange}
           isExpanded={item.isExpanded}
           handleClick={this.handleClick}

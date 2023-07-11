@@ -124,19 +124,32 @@ var FeatureStock = function(props) {
           {props.latestTime}
         </p>
         <p
-          className={"marketCap"
+          className={"prevClose"
                       +" " +
             (props.isExpanded ? "featureExpanded" : "featureHidden") }
         >
-          ${(props.marketCap > 1000000000)?(props.marketCap/1000000000).toFixed(2) +" Billion":
-           ((props.marketCap > 1000000)?(props.marketCap/1000000).toFixed(2) +" Million":props.marketCap)}
+          ${(Number(props.prevClose).toFixed(2))}
         </p>
          <p
-          className={"ytdChange"
+          className={"open"
                       +" " +
             (props.isExpanded ? "featureExpanded" : "featureHidden") }
         >
-          {(props.ytdChange * 100).toFixed(2) +"%"}
+          ${Number(props.open).toFixed(2) }
+        </p>
+        <p
+          className={"low"
+                      +" " +
+            (props.isExpanded ? "featureExpanded" : "featureHidden") }
+        >
+          ${Number(props.low).toFixed(2) }
+        </p>
+        <p
+          className={"high"
+                      +" " +
+            (props.isExpanded ? "featureExpanded" : "featureHidden") }
+        >
+          ${Number(props.high).toFixed(2) }
         </p>
       </div>
 
