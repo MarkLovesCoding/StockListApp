@@ -313,9 +313,7 @@ toggleCustomDisplay(){
     }
     const tdKey ="e1432819e1b743cc8fb8dea7255e1141"
 
-    const token = "pk_8dc96364d1d94c0db9425f98efde9b4d";
     const address =
-      // "https://cloud.iexapis.com/stable/stock/" +
       "https://api.twelvedata.com/quote?symbol="+ 
       symbol +
       "&apikey="+
@@ -341,7 +339,7 @@ toggleCustomDisplay(){
             price: resp.close,
             symbol: resp.symbol,
             change: resp.change,
-            changePercent: resp.percent_change*100,
+            changePercent: resp.percent_change,
             avgTotalVolume: resp.average_volume,
             week52High: resp.fifty_two_week.high,
             week52Low: resp.fifty_two_week.low,
@@ -349,8 +347,8 @@ toggleCustomDisplay(){
             latestTime: resp.timestamp,
             primaryExchange: resp.exchange,
             peRatio: resp.peRatio,
-            ytdChange:1000,
-            marketCap: 10000000,
+            ytdChange:"",
+            marketCap: "",
             isExpanded: false,
             isInCustom:false
           };
