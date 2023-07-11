@@ -1,6 +1,5 @@
 
 import React from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {FaSearch} from 'react-icons/fa'
 var StockGet = function(props) {
 

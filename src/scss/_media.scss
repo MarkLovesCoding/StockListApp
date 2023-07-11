@@ -11,8 +11,8 @@
       "exchange exchange price price price"
       "time time price price price"
       "symbol symbol arrow change changePercent"
-      "peRatio volume . week52Low week52High"
-      "marketCap ytdChange . . ."
+      "dayVolume avgVolume . week52Low week52High"
+      "prevClose open . low high"
       ". . . . .";
     .change,
     .changePercent,
@@ -69,7 +69,7 @@
   .social-coding {
     margin-left: 0px !important;
   }
-
+}
 
 @media (min-width: 820px) {
   .expanded {
@@ -78,9 +78,9 @@
     height: 450px;
     width: 95vw;
     max-width: 700px;
-    grid-template-rows: 2.8em 1.5em 1em 70px 0.6fr 0.6fr 20px;
+    grid-template-rows: 2.8em 1.5em 1em 70px 0.6fr 0.6fr 40px;
     grid-template-columns: 25% 1fr 0px 1fr 1fr;
-    grid-template-areas: "stockName stockName stockName stockName stockName" "exchange exchange price price price" "time time price price price" "symbol symbol arrow change changePercent" "peRatio volume .week52Low week52High" "marketCap ytdChange . . ." ". . . . . ";
+    grid-template-areas: "stockName stockName stockName stockName stockName" "exchange exchange price price price" "time time price price price" "symbol symbol arrow change changePercent" "dayVolume avgVolume . week52Low week52High" "prevClose open . low high" ". . . . . ";
     .change,
     .changePercent,
     .negativeArrow {

@@ -13,12 +13,12 @@ var Footer = function(props) {
       </div>
       <ul className="social-coding">
         <li> <a href={'https://freecodecamp.com/markhalstead'}>
-        <i class="fab fa-free-code-camp"></i>
+        <i className="fab fa-free-code-camp"></i>
         <FaFreeCodeCamp />
         </a>
         </li>
          <li>  <a href={'https://github.com/MarkTriesCoding/'}>
-         <i class="fab fa-github"></i>
+         <i className="fab fa-github"></i>
          <FaGithub />
          </a>
          </li>

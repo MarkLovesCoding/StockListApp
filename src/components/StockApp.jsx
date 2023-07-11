@@ -7,9 +7,8 @@ import StockGet from './StockGet';
 import Presets from './Presets';
 import Intro from './Intro';
 
-import {FaCannabis, FaKeyboard, FaLightbulb , FaBookmark, FaRing, FaPen, FaIndustry, FaSun, FaMoneyBill, FaPrescription, FaToiletPaper,FaPlusSquare} from 'react-icons/fa'
+import { FaCannabis, FaKeyboard, FaLightbulb, FaBookmark, FaRing, FaPen, FaIndustry, FaSun, FaMoneyBill, FaPrescription, FaToiletPaper, FaPlusSquare } from 'react-icons/fa'
 
-import M from 'materialize-css'
 
 class StockApp extends React.Component {
   constructor(props) {
@@ -20,20 +19,19 @@ class StockApp extends React.Component {
       noStock: false,
       stocksDisplayed: true,
       presetsListDisplay: false,
-      showModal:false,
-      modalText:"",
+      showModal: false,
+      modalText: "",
 
-      //  presetsListMenuDisplay:true,
       presets: {
-        INDEX: { tickers: ["SPY", "DOW", "NSQ"], iconTag:  <FaBookmark /> },
+        INDEX: { tickers: ["SPY", "DOW", "NSQ"], iconTag: <FaBookmark /> },
         BIOTECH: { tickers: ["MRK", "PFE", "MRNA"], iconTag: <FaPrescription /> },
-        HEALTH: { tickers: ["CNC", "ALGN", "CVS","ICLR", "ABBV"], iconTag: <FaPlusSquare /> },
-        "CONSUMER DISC.": { tickers: ["WMT", "MCD", "XLY","AMZN"], iconTag: <FaMoneyBill /> },
-        "CONSUMER STAPLES": { tickers: ["VDC", "XLP", "IEV","SRCS"], iconTag: <FaToiletPaper /> },
+        HEALTH: { tickers: ["CNC", "ALGN", "CVS", "ICLR", "ABBV"], iconTag: <FaPlusSquare /> },
+        "CONSUMER DISC.": { tickers: ["WMT", "MCD", "XLY", "AMZN"], iconTag: <FaMoneyBill /> },
+        "CONSUMER STAPLES": { tickers: ["VDC", "XLP", "IEV", "SRCS"], iconTag: <FaToiletPaper /> },
         INDUSTRIAL: { tickers: ["XLI", "VIS", "IYT"], iconTag: <FaIndustry /> },
         CANNABIS: {
           tickers: ["ACB", "CGC", "CRON", "TLRY"],
-          iconTag: <FaCannabis data-key="CANNABIS"/>
+          iconTag: <FaCannabis data-key="CANNABIS" />
         },
         FAANG: {
           tickers: ["META", "AMZN", "AAPL", "NFLX", "GOOG"],
@@ -65,319 +63,330 @@ class StockApp extends React.Component {
     this.toggleCustomDisplay = this.toggleCustomDisplay.bind(this);
     this.convertCap = this.convertCap.bind(this);
   }
-
-  componentDidUnmount() {
+  componentWillUnmount() {
+    // Clears the stocks list and stock input when the component is unmounted
     this.setState({
       stocks: [],
       stockInput: ""
     });
   }
-
+  
   handleChange(event) {
+    // Updates the stock input value in the component's state
     const { value } = event.target;
     this.setState({
       stockInput: value
     });
-
   }
-
+  
   handleSubmit(event) {
     event.preventDefault();
-    event.target.childNodes[1].focus()
+  
+    // Focuses on the input field after submitting the form
+    event.target.childNodes[1].focus();
+  
+    // Activates the search if it's not already active
     if (!this.state.searchActive) {
       this.setState({ searchActive: !this.state.searchActive });
     }
-    // Check if stock already exists
-    const checkInput = this.state.stocks.some(el => {
-      return el.symbol === this.state.stockInput.toUpperCase();
-    });
-    if (checkInput) {
-    } else {
+  
+    // Checks if the stock already exists in the stocks list
+    const checkInput = this.state.stocks.some(el => el.symbol === this.state.stockInput.toUpperCase());
+    if (!checkInput) {
+      // Performs a stock search if the stock doesn't already exist in the list
       this.stockSearch(this.state.stockInput);
     }
   }
-
+  
   handleClick(event) {
     event.stopPropagation();
-     event.preventDefault();
-    let targetClass = event.target.className ;
-switch(targetClass){
-  case "closeBox":
-    this.closeStock(event);
-
-  break;
-  case "addToCustom":
-    this.addToCustom(event);
-  break;
-  case "removeToCustom":
-    this.removeToCustom(event);
-  break;
-  default:
-    this.resizeStock(event);
-}
-
-
-
-
-
+    event.preventDefault();
+    
+    let targetClass = event.target.className;
+    switch (targetClass) {
+      case "closeBox":
+        // Closes the stock when the close button is clicked
+        this.closeStock(event);
+        break;
+      case "addToCustom":
+        // Adds the stock to the custom list when the "Add to Custom" button is clicked
+        this.addToCustom(event);
+        break;
+      case "removeToCustom":
+        // Removes the stock from the custom list when the "Remove from Custom" button is clicked
+        this.removeToCustom(event);
+        break;
+      default:
+        // Resizes the stock when any other part of the stock box is clicked
+        this.resizeStock(event);
+    }
   }
-  // displayAddState(addState) {
-  //   if (addState) {
-  //   }
-  // }
-
-  convertCap(cap){
-
+  
+  convertCap(cap) {
     let length = cap.length;
-    console.log(length)
     let num;
     let suffix;
-    if (length => 9){
-      num = cap / 9;
-      num.toFloat(1);
+  
+    if (length >= 9) {
+      // Converts the market capitalization to billion scale
+      num = cap / 1e9;
+      num.toFixed(1);
       suffix = "billion";
-      console.log( num + suffix);
-    }
-    else if(length <9 && length>6)
-    {
-      num = cap / 6;
-      num.toFloat(1);
+      console.log(num + suffix);
+    } else if (length < 9 && length > 6) {
+      // Converts the market capitalization to million scale
+      num = cap / 1e6;
+      num.toFixed(1);
       suffix = "million";
-      console.log( num + suffix);
+      console.log(num + suffix);
+    } else if (cap == null) {
+      suffix = "-";
+      console.log(suffix);
+    } else {
+      console.log(cap);
     }
-    else if(cap==null){
-      suffix= "-"
-      console.log( suffix);
-    }
-    else {console.log( cap)}
-
-
   }
-  displayModal(text){
+  
+
+  displayModal(text) {
+    // Displays a modal with the given text
     this.setState({
-        showModal:true,
-        modalText:text
-      })
-      setTimeout(()=>{
-        this.setState({
-          showModal:false,
-          modalText:""
-        })
-      },800)
+      showModal: true,
+      modalText: text
+    });
+    
+    // After 1000 milliseconds, hides the modal
+    setTimeout(() => {
+      this.setState({
+        showModal: false,
+        modalText: ""
+      });
+    }, 1000);
   }
-removeFromCustom(event){
-  event.stopPropagation();
-  const dataKey = event.target.parentElement.getAttribute("data-key");
-
-    if (
-      this.state.presets.myStocks.tickers.some(el => {
-        return el === dataKey;
-      })
-    ){
+  
+  removeFromCustom(event) {
+    event.stopPropagation();
+  
+    // Retrieves the data key from the parent element
+    const dataKey = event.target.parentElement.getAttribute("data-key");
+  
+    if (this.state.presets.myStocks.tickers.some(el => el === dataKey)) {
+      // If the data key exists in the "myStocks" presets, remove it from the list
       let tempPresets = this.state.presets.myStocks.tickers;
-      for(let i=0;i<tempPresets.length;i++){
-        if(tempPresets[i] === dataKey){
-          tempPresets.splice(i,1);
+      for (let i = 0; i < tempPresets.length; i++) {
+        if (tempPresets[i] === dataKey) {
+          tempPresets.splice(i, 1);
         }
       }
-      this.displayModal(dataKey + " removed from myStocks")
-      //remove from list
+      // Displays a modal indicating the stock was removed from "myStocks"
+      this.displayModal(dataKey + " removed from myStocks");
+    } else {
+      // Displays a modal indicating the stock is not in "myStocks"
+      this.displayModal(dataKey + " not in myStocks");
     }
-  else{
-    this.displayModal(dataKey + " not in myStocks")
-    //display that stock not in list
   }
-}
-
+  
   addToCustom(event) {
     event.stopPropagation();
-
-    const dataKey = event.target.parentElement.getAttribute("data-key") || event.target.getAttribute("data-key")
-    ;
-     ;
-    if (
-      this.state.presets.myStocks.tickers.some(el => {
-        return el === dataKey;
-      })
-    ) {
-      this.displayModal(dataKey + " already in myStocks")
-      //alert("already in list");
+  
+    // Retrieves the data key from the parent element or the target element
+    const dataKey = event.target.parentElement.getAttribute("data-key") || event.target.getAttribute("data-key");
+  
+    if (this.state.presets.myStocks.tickers.some(el => el === dataKey)) {
+      // Displays a modal indicating the stock is already in "myStocks"
+      this.displayModal(dataKey + " already in myStocks");
     } else {
+      // Adds the data key to the "myStocks" presets and displays a modal indicating the stock was added
       let tempPresets = this.state.presets;
       tempPresets.myStocks.tickers.push(dataKey);
       this.setState({
         presets: tempPresets
       });
-      this.displayModal(dataKey + " added to myStocks!")
-     // alert("stock added to custom list");
+      this.displayModal(dataKey + " added to myStocks!");
     }
   }
-
+  
   presetDisplay(event) {
     event.stopPropagation();
-    console.log(event.target.getAttribute("data-key"))
-
-    // if(event.target.tagName =="li"){
-    //   console.log(" LI ")
-    // }
-
-   const dataKey = (event.target.hasAttribute("data-key") || event.target.parentNode.parentNode.hasAttribute("data-key") ) ? event.target.getAttribute("data-key") : null;
-
-
-     if(dataKey){
-    // const dataKey = event.target.getAttribute("data-key") ;
-       console.log(dataKey);
-      this.state.presets[dataKey].tickers.forEach(el => {
-        this.stockSearch(el);
+  
+    // Retrieves the data key from the target or the parent's parent element
+    const dataKey = (event.target.hasAttribute("data-key") || event.target.parentNode.parentNode.hasAttribute("data-key")) ? event.target.getAttribute("data-key") : null;
+  
+    if (dataKey) {
+      // Logs the data key and performs a stock search for each ticker in the preset
+      console.log(dataKey);
+      this.state.presets[dataKey].tickers.forEach(async el => {
+        await this.stockSearch(el);
       });
     }
   }
-
+  
   togglePresetsDisplay() {
+    // Toggles the display of the presets list
     this.setState({
       presetsListDisplay: !this.state.presetsListDisplay,
       presetsListMenuDisplay: !this.state.presetsMenuListDisplay
     });
   }
-  // togglePresetsHover(){
-  //   this.setState({
-  //     presetsListDisplay: !this.state.presetsListDisplay
-  //   });
-  // }
-toggleCustomDisplay(){
-  this.setState({
-    customToggle: !this.state.customToggle
-  })
-}
-// toggleAddRemoveDisplay(e){
-//   let {target}=e;
-
-// }
-
+  
+  toggleCustomDisplay() {
+    // Toggles the display of the custom view
+    this.setState({
+      customToggle: !this.state.customToggle
+    });
+  }
+  
   closeStock(e) {
+    // Closes a stock by removing it from the stocks list
     let target = e.target;
     let tempStocks = this.state.stocks.slice();
     let symbolOfBox = target.parentNode.getAttribute("data-key");
     tempStocks = tempStocks.filter(el => {
       return el.symbol !== symbolOfBox;
     });
-    //  let tempGraphData = tempGraphData.filter( el =>{
-    //   return el.x !== symbolOfBox ;
-    // })
+  
     this.setState({
-      stocks: tempStocks,
-      // graphData: tempGraphData
+      stocks: tempStocks
     });
   }
-
+  
   resizeStock(e) {
     let eTarget;
     let tempStocks = this.state.stocks.slice();
     let symbolOfBox;
-    console.log( e.target.className.split(" "))
-    if ( e.target.className.split(" ").includes( "featureStock" ) ) {
+  
+    // Determines the target element based on its class name
+    if (e.target.className.split(" ").includes("featureStock")) {
       eTarget = e.target;
-    }
-    // else if (Array(e.target.parentNode.className).includes("price")) {
-    //   target = e.target.parentNode.parentNode;
-    // }
-    else {
+    } else {
       eTarget = e.target.parentNode;
     }
-  //  console.log(target)
+  
     symbolOfBox = eTarget.getAttribute("data-key");
+  
+    // Toggles the expanded state of the stock and updates the stocks list
     tempStocks = tempStocks.map(el => {
-      if (el.symbol == symbolOfBox) {
+      if (el.symbol === symbolOfBox) {
         el.isExpanded = !el.isExpanded;
-        console.log(el.isExpanded);
-        //console.log(el);
         this.setState({
           stocks: tempStocks
         });
       }
     });
-  //  console.log(target);
   }
-
+  
   closeAllStocks() {
+    // Closes all stocks by clearing the stocks list, stock input, and graph data
     this.setState({
       stocks: [],
       stockInput: "",
-      graphData:[]
+      graphData: []
     });
   }
+  
 
-  stockSearch(symbol) {
-    if(!symbol){
+
+
+
+
+  async stockSearch(symbol) {
+    if (!symbol) {
       return
     }
-    const tdKey ="e1432819e1b743cc8fb8dea7255e1141"
+    const tdKey = "e1432819e1b743cc8fb8dea7255e1141"
 
-    const address =
-      "https://api.twelvedata.com/quote?symbol="+ 
+    const addressQuote =
+      "https://api.twelvedata.com/quote?symbol=" +
       symbol +
-      "&apikey="+
+      "&apikey=" +
       tdKey;
-    console.log(address);
-    fetch(address)
-      .then(resp => {
-        if (resp.status == 404) {
-          //run function that shakes stockform
-        }
-        return resp.json();
-      })
-      .then(resp => {
-        // this.setState({
-        //         animateInput: ""
-        //       });
-        let checkIfStock = this.state.stocks.some(el => {
-          return el.symbol == resp.symbol;
-        });
-        if (!checkIfStock) {
-          let newStock = {
-            stock: resp.name,
-            price: resp.close,
-            symbol: resp.symbol,
-            change: resp.change,
-            changePercent: resp.percent_change,
-            avgTotalVolume: resp.average_volume,
-            week52High: resp.fifty_two_week.high,
-            week52Low: resp.fifty_two_week.low,
-            lastTradeTime: resp.timestamp,
-            latestTime: resp.timestamp,
-            primaryExchange: resp.exchange,
-            peRatio: resp.peRatio,
-            prevClose:resp.previous_close,
-            open: resp.open,
-            low: resp.low,
-            high: resp.high,
-            isExpanded: false,
-            isInCustom:false
-          };
-          console.log(newStock)
 
-          //  var graphableData = {
-          //   x:this.state.graphData.length + 1,
-          //   y:resp.changePercent,
-          //    y0:0,
-          //    label:resp.symbol
-          // };
-          this.setState({
-            stocks: [newStock,...this.state.stocks],
-            noStock: false,
-            stockInput: "",
-           // graphData:[graphableData, ...this.state.graphData]
+    const addressPrice =
+      "https://api.twelvedata.com/price?symbol=" +
+      symbol +
+      "&apikey=" +
+      tdKey;
+
+
+
+
+    var currPrice
+    try {
+
+
+      // await fetch(addressPrice)
+      //   .then(resp => {
+      //     if (resp.status === 404) {
+      //       //run function that shakes stockform
+      //     }
+      //     return resp.json();
+      //   })
+      //   .then(resp => {
+      //     currPrice = resp.price
+      //   });
+
+
+
+
+
+      await fetch(addressQuote)
+        .then(resp => {
+          if (resp.status === 404) {
+            //run function that shakes stockform
+          }
+          return resp.json();
+        })
+        .then(resp => {
+          let checkIfStock = this.state.stocks.some(el => {
+            return el.symbol === resp.symbol;
           });
-        console.log(this.state.stocks)
-        }
-      });
+          if (!checkIfStock) {
+            let newStock = {
+              stock: resp.name ? resp.name : "-",
+              // Temp use closing price instead of two API calls
+              price: resp.close,
+              symbol: resp.symbol,
+              change: resp.change,
+              changePercent: resp.percent_change,
+              avgTotalVolume: resp.average_volume,
+              week52High: resp.fifty_two_week.high,
+              week52Low: resp.fifty_two_week.low,
+              lastTradeTime: resp.timestamp,
+              latestTime: resp.timestamp,
+              primaryExchange: resp.exchange,
+              dayVolume: resp.volume,
+              prevClose: resp.previous_close,
+              open: resp.open,
+              low: resp.low,
+              high: resp.high,
+              isExpanded: false,
+              isInCustom: false
+            };
+
+            this.setState(prevState => ({
+              stocks: [newStock, ...prevState.stocks],
+              noStock: false,
+              stockInput: "",
+            }));
+            // console.log(this.state.stocks)
+          }
+        });
+
+    }
+    catch (err) {
+      console.log("Error handling API. Please wait one minute and try again.")
+      this.displayModal("Maximum API calls reached. Please try again in one minute")
+      return
+    }
+
+
   }
 
+
   render() {
-    let stockCount = this.state.stocks.length;
-    let noStock = this.state.noStock;
+
     const listOfStocks = this.state.stocks.map((item, index) => {
-      console.log("item:"+Number(item.price).toFixed(2))
+      // console.log("item:"+Number(item.price).toFixed(2))
       if (item.isClosed) {
         return null;
       }
@@ -394,7 +403,7 @@ toggleCustomDisplay(){
           avgTotalVol={item.avgTotalVolume}
           latestTime={item.latestTime}
           changePercent={item.changePercent}
-          peRatio={item.peRatio}
+          dayVolume={item.dayVolume}
           prevClose={item.prevClose}
           open={item.open}
           low={item.low}
@@ -404,7 +413,7 @@ toggleCustomDisplay(){
           handleClick={this.handleClick}
           addToCustom={this.addToCustom}
           removeFromCustom={this.removeFromCustom}
-          convertCap = {this.convertCap}
+          convertCap={this.convertCap}
 
         />
       );
@@ -418,8 +427,8 @@ toggleCustomDisplay(){
             className="searchAndLists"
             style={
               this.state.presetsListDisplay
-                ? { "flex-direction": "column" }
-                : { "flex-direction": "row" }
+                ? { "flexDirection": "column" }
+                : { "flexDirection": "row" }
             }
           >
             <StockGet
@@ -439,7 +448,7 @@ toggleCustomDisplay(){
 
           <div className="list">{listOfStocks}</div>
           <div
-            className={"waves-effect waves-light "+
+            className={"waves-effect waves-light " +
               "closeAllStocks" +
               " " +
               (this.state.stocks.length > 0 ? "" : "hideCloseAll")
@@ -449,7 +458,7 @@ toggleCustomDisplay(){
             Close All
           </div>
         </div>
-        <Modal modalText={this.state.modalText} showModal={this.state.showModal}/>
+        <Modal modalText={this.state.modalText} showModal={this.state.showModal} />
 
 
         <Footer />

@@ -10,6 +10,10 @@ function crop_name_length(props_symbol){
     return props_symbol
   }
 }
+function convertDate(date){
+  let newDate = new Date(date*1000)
+  return newDate.toUTCString()
+}
 
 var FeatureStock = function(props) {
   if(props.isClosed) {
@@ -96,7 +100,7 @@ var FeatureStock = function(props) {
             (props.isExpanded ? "featureExpanded" : "featureHidden")
           }
         >
-          ${props.yearHigh}
+          ${Number(props.yearHigh).toFixed(2)}
         </p>
         <p
           className={
@@ -106,22 +110,22 @@ var FeatureStock = function(props) {
             (props.isExpanded ? "featureExpanded" : "featureHidden")
           }
         >
-          ${props.yearLow}
+          ${Number(props.yearLow).toFixed(2)}
         </p>
         <p
           className={
-            "peRatio"
+            "dayVolume"
 
                +" " +
             (props.isExpanded ? "featureExpanded" : "featureHidden")
           }
         >
-          {props.peRatio ? props.peRatio : "-"}
+          {props.dayVolume ? props.dayVolume : "-"}
         </p>
         <p
           className={"lastTradeTime"}
         >
-          {props.latestTime}
+          {convertDate(props.latestTime)}
         </p>
         <p
           className={"prevClose"

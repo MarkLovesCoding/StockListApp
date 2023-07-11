@@ -345,8 +345,6 @@ input {
       .presetList .presets li i {
         transform: scale(2.5);
         padding: 5px;
-        margin-bottom: 10px;
-        color: rgba(244, 200, 100, 0.1);
         color: #323246;
         transition: color 0.4s ease; }
       .presetList .presets li h4 {
@@ -530,20 +528,20 @@ input {
     content: "52 WK HIGH"; }
 
 .avgVolume {
-  grid-area: volume;
+  grid-area: avgVolume;
   font-weight: 600;
   font-size: 1.1rem; }
   .avgVolume:before {
     font-weight: 200;
-    content: "VOLUME"; }
+    content: "AVG. VOLUME"; }
 
-.peRatio {
-  grid-area: peRatio;
+.dayVolume {
+  grid-area: dayVolume;
   font-weight: 600;
   font-size: 1.1rem; }
-  .peRatio:before {
+  .dayVolume:before {
     font-weight: 200;
-    content: "P/E"; }
+    content: "VOLUME"; }
 
 .lastTradeTime {
   font-size: 0.8em;
@@ -552,12 +550,28 @@ input {
   display: grid;
   grid-area: time; }
 
-.ytdChange {
-  grid-area: ytdChange;
+.open {
+  grid-area: open;
   font-weight: 600;
   font-size: 1.1rem; }
-  .ytdChange:before {
-    content: "YTD Change";
+  .open:before {
+    content: "OPEN";
+    font-weight: 200; }
+
+.low {
+  grid-area: low;
+  font-weight: 600;
+  font-size: 1.1rem; }
+  .low:before {
+    content: "LOW";
+    font-weight: 200; }
+
+.high {
+  grid-area: high;
+  font-weight: 600;
+  font-size: 1.1rem; }
+  .high:before {
+    content: "HIGH";
     font-weight: 200; }
 
 .positive {
@@ -661,7 +675,7 @@ input {
   width: 95vw;
   grid-template-rows: 3em 1em 1em 1fr 50px 0.6fr 0.6fr 20px;
   grid-template-columns: 25% 1fr 1fr 1fr;
-  grid-template-areas: "stockName stockName stockName stockName" "exchange exchange exchange exchange" "time time time time" "symbol symbol price price" ". arrow change changePercent " "peRatio volume week52Low week52High" "marketCap ytdChange . ." ". . . ."; }
+  grid-template-areas: "stockName stockName stockName stockName" "exchange exchange exchange exchange" "time time time time" "symbol symbol price price" ". arrow change changePercent " "dayVolume avgVolume week52Low week52High" "prevClose open low high" ". . . ."; }
   .expanded:after {
     position: absolute;
     content: "<";
@@ -670,23 +684,25 @@ input {
     right: 10px;
     color: rgba(0, 0, 0, 0.7);
     cursor: pointer; }
-  .expanded .marketCap {
-    grid-area: marketCap;
+  .expanded .prevClose {
+    grid-area: prevClose;
     font-weight: 600;
     font-size: 1.1rem;
     margin-top: 20px; }
-    .expanded .marketCap:before {
+    .expanded .prevClose:before {
       font-weight: 200;
-      content: "MARKET CAP"; }
+      content: "PREVIOUS CLOSE"; }
   .expanded .changePercent {
     margin-left: -50%;
     justify-content: flex-start; }
-  .expanded .peRatio,
+  .expanded .dayVolume,
   .expanded .week52High,
   .expanded .week52Low,
   .expanded .avgVolume,
-  .expanded .marketCap,
-  .expanded .ytdChange {
+  .expanded .prevClose,
+  .expanded .open,
+  .expanded .high,
+  .expanded .low {
     align-self: flex-end;
     padding-left: 5px;
     padding-right: 5px;
@@ -694,21 +710,25 @@ input {
     position: relative;
     font-size: 1rem;
     animation: loadFeature 1.5s; }
-    .expanded .peRatio:before,
+    .expanded .dayVolume:before,
     .expanded .week52High:before,
     .expanded .week52Low:before,
     .expanded .avgVolume:before,
-    .expanded .marketCap:before,
-    .expanded .ytdChange:before {
+    .expanded .prevClose:before,
+    .expanded .open:before,
+    .expanded .high:before,
+    .expanded .low:before {
       padding-bottom: 5px;
       font-size: 0.85rem;
       text-align: left; }
-    .expanded .peRatio:after,
+    .expanded .dayVolume:after,
     .expanded .week52High:after,
     .expanded .week52Low:after,
     .expanded .avgVolume:after,
-    .expanded .marketCap:after,
-    .expanded .ytdChange:after {
+    .expanded .prevClose:after,
+    .expanded .open:after,
+    .expanded .high:after,
+    .expanded .low:after {
       content: "";
       width: 100%;
       height: 2px;
@@ -716,12 +736,14 @@ input {
       margin-top: 10px;
       background-color: rgba(0, 0, 0, 0.2);
       transition: all 0.2s ease-in; }
-    .expanded .peRatio:hover:after,
+    .expanded .dayVolume:hover:after,
     .expanded .week52High:hover:after,
     .expanded .week52Low:hover:after,
     .expanded .avgVolume:hover:after,
-    .expanded .marketCap:hover:after,
-    .expanded .ytdChange:hover:after {
+    .expanded .prevClose:hover:after,
+    .expanded .open:hover:after,
+    .expanded .high:hover:after,
+    .expanded .low:hover:after {
       background-color: rgba(0, 0, 0, 0.3); }
 
 @keyframes loadFeature {
@@ -745,7 +767,10 @@ input {
   .expanded .lastTradeTime,
   .expanded .stockName {
     font-size: 0.8rem;
-    padding-left: 10px; }
+    padding-left: 10px;
+    overflow-x: overlay;
+    min-width: 100%;
+    width: auto; }
   .expanded .exchange {
     font-size: 0.7rem;
     padding-left: 10px; }
@@ -879,7 +904,7 @@ input {
     width: 95vw;
     grid-template-rows: 2.8em 1em 1.5em 120px 0.6fr 0.6fr 20px;
     grid-template-columns: 25% 1fr 0px 1fr 1fr;
-    grid-template-areas: "stockName stockName stockName stockName stockName" "exchange exchange price price price" "time time price price price" "symbol symbol arrow change changePercent" "peRatio volume . week52Low week52High" "marketCap ytdChange . . ." ". . . . ."; }
+    grid-template-areas: "stockName stockName stockName stockName stockName" "exchange exchange price price price" "time time price price price" "symbol symbol arrow change changePercent" "dayVolume avgVolume . week52Low week52High" "prevClose open . low high" ". . . . ."; }
     .expanded .change,
     .expanded .changePercent,
     .expanded .negativeArrow {
@@ -922,8 +947,7 @@ input {
     flex-direction: column;
     flex-flow: wrap; }
   .social-coding {
-    margin-left: 0px !important; }
-  /* Styles */ }
+    margin-left: 0px !important; } }
 
 @media (min-width: 820px) {
   .expanded {
@@ -932,9 +956,9 @@ input {
     height: 450px;
     width: 95vw;
     max-width: 700px;
-    grid-template-rows: 2.8em 1.5em 1em 70px 0.6fr 0.6fr 20px;
+    grid-template-rows: 2.8em 1.5em 1em 70px 0.6fr 0.6fr 40px;
     grid-template-columns: 25% 1fr 0px 1fr 1fr;
-    grid-template-areas: "stockName stockName stockName stockName stockName" "exchange exchange price price price" "time time price price price" "symbol symbol arrow change changePercent" "peRatio volume .week52Low week52High" "marketCap ytdChange . . ." ". . . . . "; }
+    grid-template-areas: "stockName stockName stockName stockName stockName" "exchange exchange price price price" "time time price price price" "symbol symbol arrow change changePercent" "dayVolume avgVolume . week52Low week52High" "prevClose open . low high" ". . . . . "; }
     .expanded .change,
     .expanded .changePercent,
     .expanded .negativeArrow {

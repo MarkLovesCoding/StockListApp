@@ -10,9 +10,10 @@
     "time time time time"
     "symbol symbol price price"
     ". arrow change changePercent "
-    "peRatio volume week52Low week52High"
+    "dayVolume avgVolume week52Low week52High"
     "prevClose open low high"
     ". . . .";
+     
   &:after {
     position: absolute;
     content: "<";
@@ -36,7 +37,7 @@
     margin-left: -50%;
     justify-content: flex-start;
   }
-  .peRatio,
+  .dayVolume,
   .week52High,
   .week52Low,
   .avgVolume,

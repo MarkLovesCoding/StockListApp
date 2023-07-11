@@ -117,21 +117,21 @@
   }
 }
 .avgVolume {
-  grid-area: volume;
+  grid-area: avgVolume;
+  font-weight: 600;
+  font-size: 1.1rem;
+  &:before {
+    font-weight: 200;
+    content: "AVG. VOLUME";
+  }
+}
+.dayVolume {
+  grid-area: dayVolume;
   font-weight: 600;
   font-size: 1.1rem;
   &:before {
     font-weight: 200;
     content: "VOLUME";
-  }
-}
-.peRatio {
-  grid-area: peRatio;
-  font-weight: 600;
-  font-size: 1.1rem;
-  &:before {
-    font-weight: 200;
-    content: "P/E";
   }
 }
 .lastTradeTime {
@@ -168,15 +168,7 @@
     font-weight: 200;
   }
 }
-.open {
-  grid-area: ytdChange;
-  font-weight: 600;
-  font-size: 1.1rem;
-  &:before {
-    content: "OPEN";
-    font-weight: 200;
-  }
-}
+
 .positive {
   color: green;
 }

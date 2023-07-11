@@ -1,5 +1,4 @@
 import React from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {FaList} from 'react-icons/fa';
 var iconSize = 25;
 
@@ -15,7 +14,7 @@ var Presets = function(props) {
       >
        { presetList[el].iconTag }
 
-        <h4 data-key={el} onClick={props.presetDisplay}>
+        <h4 data-key={el} >
           {el}
         </h4>
       </li>
